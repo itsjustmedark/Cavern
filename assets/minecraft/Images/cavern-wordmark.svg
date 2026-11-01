@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="420" height="80">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Mark -->
+  <g transform="translate(8, 8)">
+    <!-- Outer arch -->
+    <path d="M8 56 C8 32 16 14 24 12 C32 14 40 32 40 56"
+          stroke="#5A467C" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <!-- Inner arch -->
+    <path d="M14 56 C14 38 18 24 24 20 C30 24 34 38 34 56"
+          stroke="#5A467C" stroke-width="0.9" fill="none" stroke-opacity="0.5" stroke-linecap="round"/>
+    <!-- Drop -->
+    <line x1="24" y1="12" x2="24" y2="6" stroke="#5A467C" stroke-width="1.2" stroke-linecap="round"/>
+    <circle cx="24" cy="4.5" r="1.8" fill="#5A467C"/>
+    <!-- Side accents -->
+    <line x1="8" y1="56" x2="3" y2="56" stroke="#5A467C" stroke-width="0.9" stroke-opacity="0.4"/>
+    <line x1="40" y1="56" x2="45" y2="56" stroke="#5A467C" stroke-width="0.9" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="72" y="56"
+        font-family="'Cormorant Garamond', 'Georgia', serif"
+        font-weight="300"
+        font-size="46"
+        letter-spacing="8"
+        fill="#E8E4F0">CAVERN</text>
+</svg>

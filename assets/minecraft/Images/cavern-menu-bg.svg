@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <!-- Deep background gradient -->
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#03020a"/>
+      <stop offset="40%" stop-color="#080614"/>
+      <stop offset="100%" stop-color="#0f0a1a"/>
+    </linearGradient>
+
+    <!-- Purple glow from below -->
+    <radialGradient id="groundGlow" cx="50%" cy="100%" r="70%">
+      <stop offset="0%" stop-color="#5A467C" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#5A467C" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#5A467C" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Faint center glow -->
+    <radialGradient id="centerGlow" cx="50%" cy="55%" r="40%">
+      <stop offset="0%" stop-color="#7a60a8" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#5A467C" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Left ambient -->
+    <radialGradient id="leftGlow" cx="15%" cy="70%" r="35%">
+      <stop offset="0%" stop-color="#5A467C" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#5A467C" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Right ambient -->
+    <radialGradient id="rightGlow" cx="85%" cy="65%" r="30%">
+      <stop offset="0%" stop-color="#5A467C" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#5A467C" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Mist gradient -->
+    <linearGradient id="mistGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5A467C" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#5A467C" stop-opacity="0.07"/>
+      <stop offset="50%" stop-color="#5A467C" stop-opacity="0.12"/>
+      <stop offset="70%" stop-color="#5A467C" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#5A467C" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Star mask -->
+    <radialGradient id="starMask" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="white" stop-opacity="1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0.1"/>
+    </radialGradient>
+    <mask id="starFade">
+      <rect width="1280" height="720" fill="url(#starMask)"/>
+    </mask>
+
+    <!-- Grid pattern -->
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#5A467C" stroke-width="0.4" stroke-opacity="0.06"/>
+    </pattern>
+    <linearGradient id="gridMask" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="0"/>
+      <stop offset="70%" stop-color="white" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="gridFade">
+      <rect width="1280" height="720" fill="url(#gridMask)"/>
+    </mask>
+
+    <!-- Reflection gradient -->
+    <linearGradient id="reflGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5A467C" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#5A467C" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1280" height="720" fill="url(#skyGrad)"/>
+
+  <!-- Stars -->
+  <g mask="url(#starFade)">
+    <!-- Scattered stars, hand-placed for natural feel -->
+    <circle cx="124" cy="48" r="0.8" fill="white" fill-opacity="0.6"/>
+    <circle cx="287" cy="22" r="0.6" fill="white" fill-opacity="0.4"/>
+    <circle cx="412" cy="65" r="1" fill="white" fill-opacity="0.5"/>
+    <circle cx="198" cy="91" r="0.5" fill="white" fill-opacity="0.3"/>
+    <circle cx="534" cy="38" r="0.7" fill="white" fill-opacity="0.45"/>
+    <circle cx="651" cy="18" r="0.9" fill="white" fill-opacity="0.55"/>
+    <circle cx="743" cy="72" r="0.6" fill="white" fill-opacity="0.35"/>
+    <circle cx="889" cy="30" r="0.8" fill="white" fill-opacity="0.5"/>
+    <circle cx="967" cy="55" r="0.5" fill="white" fill-opacity="0.3"/>
+    <circle cx="1089" cy="24" r="1" fill="white" fill-opacity="0.5"/>
+    <circle cx="1178" cy="68" r="0.7" fill="white" fill-opacity="0.4"/>
+    <circle cx="1230" cy="42" r="0.6" fill="white" fill-opacity="0.35"/>
+    <circle cx="56" cy="130" r="0.5" fill="white" fill-opacity="0.25"/>
+    <circle cx="340" cy="108" r="0.7" fill="white" fill-opacity="0.3"/>
+    <circle cx="580" cy="115" r="0.5" fill="white" fill-opacity="0.25"/>
+    <circle cx="820" cy="95" r="0.8" fill="white" fill-opacity="0.4"/>
+    <circle cx="1050" cy="110" r="0.6" fill="white" fill-opacity="0.3"/>
+    <circle cx="1260" cy="95" r="0.5" fill="white" fill-opacity="0.2"/>
+    <!-- Purple-tinted stars near horizon -->
+    <circle cx="320" cy="160" r="0.7" fill="#b8a0e0" fill-opacity="0.3"/>
+    <circle cx="780" cy="145" r="0.8" fill="#b8a0e0" fill-opacity="0.25"/>
+    <circle cx="1100" cy="155" r="0.6" fill="#b8a0e0" fill-opacity="0.2"/>
+  </g>
+
+  <!-- Ambient glows -->
+  <rect width="1280" height="720" fill="url(#groundGlow)"/>
+  <rect width="1280" height="720" fill="url(#centerGlow)"/>
+  <rect width="1280" height="720" fill="url(#leftGlow)"/>
+  <rect width="1280" height="720" fill="url(#rightGlow)"/>
+
+  <!-- Grid floor -->
+  <rect width="1280" height="720" fill="url(#grid)" mask="url(#gridFade)"/>
+
+  <!-- Distant mountain range - far layer -->
+  <path d="M0 420 C80 380 140 340 200 320 C260 300 300 350 360 330 C420 310 460 260 530 250 C600 240 640 290 700 280 C760 270 800 220 870 210 C940 200 980 260 1050 250 C1120 240 1160 200 1230 195 C1260 192 1270 200 1280 200 L1280 720 L0 720 Z"
+        fill="#0d0818" fill-opacity="0.95"/>
+
+  <!-- Mountain range - mid layer -->
+  <path d="M0 480 C60 450 100 410 160 390 C220 370 270 420 330 400 C390 380 440 330 510 320 C580 310 620 360 680 345 C740 330 790 280 860 270 C930 260 970 320 1040 305 C1110 290 1160 250 1220 240 C1250 235 1265 245 1280 242 L1280 720 L0 720 Z"
+        fill="#0a0614" fill-opacity="0.97"/>
+
+  <!-- Mist band across mountains -->
+  <rect x="0" y="340" width="1280" height="80" fill="url(#mistGrad)" opacity="0.6"/>
+  <rect x="0" y="380" width="1280" height="60" fill="url(#mistGrad)" opacity="0.4"/>
+
+  <!-- Foreground cliff/ground - left -->
+  <path d="M0 720 L0 560 C40 545 80 530 130 540 C180 550 200 580 240 570 C280 560 300 530 340 535 L340 720 Z"
+        fill="#060410" fill-opacity="1"/>
+
+  <!-- Foreground cliff/ground - right -->
+  <path d="M1280 720 L1280 545 C1240 535 1200 525 1150 538 C1100 551 1080 575 1040 565 C1000 555 975 530 940 535 L940 720 Z"
+        fill="#060410" fill-opacity="1"/>
+
+  <!-- Ground/floor -->
+  <path d="M0 720 L0 620 C160 600 280 610 400 605 C520 600 580 615 640 612 C700 609 760 600 880 605 C1000 610 1120 600 1280 615 L1280 720 Z"
+        fill="#060410" fill-opacity="1"/>
+
+  <!-- Still water / reflective surface in middle distance -->
+  <path d="M200 590 C350 580 500 575 640 573 C780 571 930 576 1080 582 L1100 620 C950 612 790 606 640 608 C490 610 340 616 180 624 Z"
+        fill="#5A467C" fill-opacity="0.06"/>
+  <!-- Water shimmer lines -->
+  <line x1="250" y1="588" x2="450" y2="582" stroke="#5A467C" stroke-width="0.5" stroke-opacity="0.15"/>
+  <line x1="560" y1="579" x2="760" y2="576" stroke="#5A467C" stroke-width="0.5" stroke-opacity="0.12"/>
+  <line x1="870" y1="580" x2="1060" y2="585" stroke="#5A467C" stroke-width="0.4" stroke-opacity="0.1"/>
+  <line x1="300" y1="598" x2="560" y2="592" stroke="#5A467C" stroke-width="0.4" stroke-opacity="0.1"/>
+  <line x1="700" y1="590" x2="950" y2="594" stroke="#5A467C" stroke-width="0.3" stroke-opacity="0.08"/>
+
+  <!-- Stalactites from top (cavern ceiling feel) -->
+  <!-- Large stalactites -->
+  <path d="M0 0 L0 60 C20 60 30 110 45 120 C55 110 60 55 80 55 L80 0 Z" fill="#03020a"/>
+  <path d="M90 0 L90 40 C105 40 112 90 122 100 C130 88 135 38 150 38 L150 0 Z" fill="#03020a"/>
+  <path d="M1130 0 L1130 50 C1148 50 1156 105 1168 115 C1178 103 1182 48 1200 48 L1200 0 Z" fill="#03020a"/>
+  <path d="M1210 0 L1210 35 C1228 35 1236 80 1248 90 C1258 78 1262 33 1280 33 L1280 0 Z" fill="#03020a"/>
+  <!-- Smaller stalactites scattered -->
+  <path d="M200 0 L200 20 C210 20 214 55 220 62 C226 55 229 18 240 18 L240 0 Z" fill="#03020a" fill-opacity="0.9"/>
+  <path d="M400 0 L400 15 C408 15 412 42 417 48 C422 42 425 14 434 14 L434 0 Z" fill="#03020a" fill-opacity="0.85"/>
+  <path d="M700 0 L700 25 C710 25 715 62 722 70 C729 62 732 23 744 23 L744 0 Z" fill="#03020a" fill-opacity="0.9"/>
+  <path d="M950 0 L950 18 C959 18 963 48 969 55 C975 48 978 16 988 16 L988 0 Z" fill="#03020a" fill-opacity="0.85"/>
+
+  <!-- Subtle purple edge glow on stalactites -->
+  <path d="M45 120 C46 122 47 124 45 126" stroke="#5A467C" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+  <path d="M122 100 C123 102 124 104 122 106" stroke="#5A467C" stroke-width="1" stroke-opacity="0.15" fill="none"/>
+
+  <!-- Atmospheric depth haze -->
+  <rect x="0" y="250" width="1280" height="200" fill="#5A467C" fill-opacity="0.025"/>
+  <rect x="0" y="200" width="1280" height="100" fill="#03020a" fill-opacity="0.15"/>
+
+  <!-- Subtle vignette -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+    <stop offset="0%" stop-color="black" stop-opacity="0"/>
+    <stop offset="100%" stop-color="black" stop-opacity="0.65"/>
+  </radialGradient>
+  <rect width="1280" height="720" fill="url(#vignette)"/>
+</svg>
