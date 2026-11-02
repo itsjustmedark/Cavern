@@ -157,7 +157,7 @@ public class CavernPlayerGui extends GuiScreen {
             var small = FontManager.getFont(FontType.MEDIUM, 14);
             int grey = new Color(150, 150, 165).getRGB();
             small.drawCenteredStringWithShadow("No music found", x + 68, y + 70, grey);
-            small.drawCenteredStringWithShadow("Drop files in cavern/Music", x + 68, y + 84, grey);
+            small.drawCenteredStringWithShadow("Drop files in Cavern/Music", x + 68, y + 84, grey);
             small.drawCenteredStringWithShadow("then press Rescan", x + 68, y + 98, grey);
             return;
         }
