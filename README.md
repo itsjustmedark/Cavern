@@ -3,13 +3,17 @@
 
 ### Controls
 
-| Action             | Keybinds  |
-|--------------------|-----------|
-| Open CavernGUI     | Press `U` |
-| Open Cavern Player | Press `M` |
+| Action              | Keybinds  |
+|---------------------|-----------|
+| Open CavernGUI      | Press `U` |
+| Open Join Games Gui | Press `J` |
+| Open Cavern Player  | Press `M` |
 
 ## Cavern Gui
 <img width="655" height="462" alt="image" src="https://github.com/user-attachments/assets/be3fc24b-8788-4b25-a7f4-bfe1530cd188" />
+
+## Join Games Gui
+<img width="646" height="429" alt="image" src="https://github.com/user-attachments/assets/8bd40c99-2bf8-4116-9620-4dbced2e5eb8" />
 
 ## Cavern Player
 <img width="818" height="450" alt="image" src="https://github.com/user-attachments/assets/2e801656-5b1e-4147-81ae-7e3cdd94efc7" />

@@ -35,6 +35,7 @@ import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
 import lombok.Getter;
+import net.cavern.gui.join.JoinGamesGui;
 import net.cavern.player.ui.CavernPlayerGui;
 import net.cavern.utils.RenderingUtils;
 import net.cavern.utils.WindowIcon;
@@ -1893,6 +1894,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                         displayGuiScreen(new CavernGui());
                     if(k == Keyboard.KEY_M && !(currentScreen instanceof CavernPlayerGui))
                         displayGuiScreen(new CavernPlayerGui());
+                    if(k == Keyboard.KEY_J && !(currentScreen instanceof JoinGamesGui))
+                        displayGuiScreen(new JoinGamesGui());
                 }
 
                 if (this.debugCrashKeyPressTime > 0L)
