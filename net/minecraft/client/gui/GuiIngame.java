@@ -381,7 +381,7 @@ public class GuiIngame extends Gui
             int i = sr.getScaledWidth() / 2;
             float f = this.zLevel;
             this.zLevel = -90.0F;
-            if (!Cavern.INSTANCE.getAddonManager().getAddon("custom_chat").isState()) {
+            if (!Cavern.INSTANCE.getAddonManager().getAddon("custom_hotbar").isState()) {
                 this.drawTexturedModalRect(i - 91, sr.getScaledHeight() - 22, 0, 0, 182, 22);
                 this.drawTexturedModalRect(i - 91 - 1 + entityplayer.inventory.currentItem * 20, sr.getScaledHeight() - 22 - 1, 0, 22, 24, 22);
             }else {
@@ -406,6 +406,7 @@ public class GuiIngame extends Gui
             {
                 int k = sr.getScaledWidth() / 2 - 90 + j * 20 + 2;
                 int l = sr.getScaledHeight() - 16 - 3;
+
                 this.renderHotbarItem(j, k, l, partialTicks, entityplayer);
             }
 
