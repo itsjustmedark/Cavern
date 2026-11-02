@@ -12,7 +12,11 @@
 <img width="655" height="462" alt="image" src="https://github.com/user-attachments/assets/be3fc24b-8788-4b25-a7f4-bfe1530cd188" />
 
 ## Cavern Player
-![Cavern Player](https://github.com/itsjustmedark/Cavern/raw/main/img_1.png)
+<img width="818" height="450" alt="image" src="https://github.com/user-attachments/assets/2e801656-5b1e-4147-81ae-7e3cdd94efc7" />
+
+#### WITH SCRUBBING
+
+<img width="832" height="435" alt="image" src="https://github.com/user-attachments/assets/696a4436-e505-48b3-b56d-4c7e8319dc1b" />
 
 ### Features
 
