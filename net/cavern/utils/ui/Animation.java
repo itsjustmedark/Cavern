@@ -86,7 +86,8 @@ public class Animation {
      */
     public enum AnimationType implements Easing {
         LINEAR(t -> t),
-        SMOOTHSTEP(t -> t * t * (3f - 2f * t));
+        SMOOTHSTEP(t -> t * t * (3f - 2f * t)),
+        EASE_OUT(t -> 1f - (1f - t) * (1f - t));
 
         private final Easing easing;
 

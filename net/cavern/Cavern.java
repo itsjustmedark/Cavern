@@ -8,6 +8,8 @@ import net.arikia.dev.drpc.DiscordUser;
 import net.arikia.dev.drpc.callbacks.ReadyCallback;
 import net.cavern.gui.toggles.CavernGui;
 import net.cavern.manager.FileManager;
+import net.cavern.player.core.CavernPlayer;
+import net.cavern.player.core.MusicLibrary;
 import net.cavern.utils.ui.liquidglass.LiquidGlass;
 import net.minecraft.client.Minecraft;
 import net.cavern.gui.quickzoom.QuickZoom;
@@ -15,6 +17,7 @@ import net.cavern.manager.AddonManager;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
+import java.io.File;
 import java.nio.file.Path;
 
 import static java.lang.Thread.sleep;
@@ -23,13 +26,15 @@ import static net.cavern.gui.quickzoom.QuickZoom.mc;
 @Getter
 public enum Cavern {
     INSTANCE;
+    // making an exception for this, thats fuckin ugly man. i dont know how i went 2 fuckin years without even having these here man what the fuck
+    public static final String NAME = "Cavern", CAVERN_VERSION = "1.3.0", CAVERN_FORMATTED = String.format("%s %s", Cavern.NAME, Cavern.CAVERN_VERSION), CAVERN_DEV = "justmedark";
     public final int clientColor = new Color(90, 70, 124, 255).getRGB();
     public final Color clientColorNonRGB = new Color(90, 70, 124, 255);
     private AddonManager addonManager;
-    // making an exception for this, thats fuckin ugly man. i dont know how i went 2 fuckin years without even having these here man what the fuck
-    public static final String NAME = "Cavern", CAVERN_VERSION = "1.3.0", CAVERN_FORMATTED = String.format("%s %s", Cavern.NAME, Cavern.CAVERN_VERSION), CAVERN_DEV = "justmedark";
-    private boolean running = true;
     private FileManager fileManager;
+    private boolean running = true;
+    public MusicLibrary library;
+    public CavernPlayer player;
     public CavernGui cavernGui;
     private long started;
 
@@ -42,6 +47,11 @@ public enum Cavern {
         Minecraft.getMinecraft().gameSettings.guiScale = 2;
         Display.setTitle(String.format("%s %s", Cavern.NAME, Cavern.CAVERN_VERSION));
         initFileSystem();
+
+        File musicDir = new File(mc.mcDataDir, "cavern" + File.separator + "Music");
+        player = new CavernPlayer(new MusicLibrary(musicDir));
+        player.getLibrary().scan();
+
         // Initialize now instead of the first time its drawn
         LiquidGlass.init();
     }
@@ -50,6 +60,7 @@ public enum Cavern {
         Path path = mc.mcDataDir.toPath().resolve("Cavern").resolve("addon_states.json");
         fileManager = new FileManager(path);
         fileManager.register("addons", addonManager);
+        fileManager.register("music", player);
         fileManager.load();
 
         Runtime.getRuntime().addShutdownHook(new Thread(fileManager::save));
