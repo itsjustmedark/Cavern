@@ -35,10 +35,10 @@
 ### Getting started
 
 1. Put your music in `Cavern/Music` (subfolders are scanned up to 4 levels deep).
-2. Open the Cavern Player from the client.
+2. Press `M` to open the Cavern Player.
 3. Press **Rescan** whenever you add or remove files.
 
-### Controls
+### Player Controls
 
 | Action          | How                                                                          |
 |-----------------|------------------------------------------------------------------------------|

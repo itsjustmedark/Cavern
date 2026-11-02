@@ -321,7 +321,7 @@ public class CavernPlayer implements Configurable {
         } catch (Exception e) {
             failed = true;
             if (id == playId) lastError = describe(e, track);
-            System.err.println("[Cavern] Can't play " + track.getFile().getName() + ":");
+            System.err.println("[Cavern] [ERROR] Can't play " + track.getFile().getName() + ":");
             e.printStackTrace();
         } finally {
             if (out != null) {
