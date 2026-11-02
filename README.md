@@ -8,6 +8,9 @@
 | Open CavernGUI     | Press `U` |
 | Open Cavern Player | Press `M` |
 
+## Cavern Gui
+<img width="655" height="462" alt="image" src="https://github.com/user-attachments/assets/be3fc24b-8788-4b25-a7f4-bfe1530cd188" />
+
 ## Cavern Player
 ![Cavern Player](https://github.com/itsjustmedark/Cavern/raw/main/img_1.png)
 
