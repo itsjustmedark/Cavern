@@ -3,7 +3,8 @@ package net.minecraft.client.gui;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.awt.Toolkit;
+
+import java.awt.*;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -16,7 +17,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import lombok.var;
+import net.cavern.Cavern;
+import net.cavern.manager.FontManager;
+import net.cavern.player.components.Track;
+import net.cavern.player.ui.CavernPlayerGui;
+import net.cavern.utils.FontType;
+import net.cavern.utils.RenderingUtils;
 import net.cavern.utils.Time;
+import net.cavern.utils.ui.liquidglass.LiquidGlass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -38,6 +47,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -85,19 +95,46 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
     /**
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         Time.update();
-        for (int i = 0; i < this.buttonList.size(); ++i)
-        {
-            ((GuiButton)this.buttonList.get(i)).drawButton(this.mc, mouseX, mouseY);
+        for (int i = 0; i < this.buttonList.size(); ++i) {
+            ((GuiButton) this.buttonList.get(i)).drawButton(this.mc, mouseX, mouseY);
         }
 
-        for (int j = 0; j < this.labelList.size(); ++j)
-        {
-            ((GuiLabel)this.labelList.get(j)).drawLabel(this.mc, mouseX, mouseY);
+        for (int j = 0; j < this.labelList.size(); ++j) {
+            ((GuiLabel) this.labelList.get(j)).drawLabel(this.mc, mouseX, mouseY);
         }
         Time.reset();
+
+        var scaledresolution = new ScaledResolution(Minecraft.getMinecraft());
+        var player = Cavern.INSTANCE.getPlayer();
+
+        if ((!mc.isSingleplayer() && mc.getCurrentServerData() == null) && player.getCurrent() != null) {
+            var small = FontManager.getFont(FontType.NORMAL, 14);
+            var center = scaledresolution.getScaledWidth() / 2;
+            long real = player.getPositionMs();
+            long dur = player.getDurationMs();
+            String total = dur > 0 ? (CavernPlayerGui.time(real) + " / " + CavernPlayerGui.time(dur)) : "--:--";
+            LiquidGlass.drawPanel((float) center - 60, 4, 120, 30, 8, 4, 0, 1, 0, 0, 0);
+
+            // COVER
+            ResourceLocation cover = player.getCover().get();
+            Track t = player.getCurrent();
+            if (t != null && cover != null) {
+                GlStateManager.enableTexture2D();
+                GlStateManager.color(1f, 1f, 1f, 1f);
+                mc.getTextureManager().bindTexture(cover);
+                Gui.drawScaledCustomSizeModalRect(center - 54, 8, 0, 0, 22, 22, 22, 22, 22, 22);
+            } else
+                RenderingUtils.drawRoundedRect(center - 54, 22, (center - 54) + 22, 22 + 22, 6, new Color(255, 255, 255, 14).getRGB());
+
+            // TEXT
+            if (t != null) {
+                small.drawStringWithShadow(CavernPlayerGui.trim(t.getTitle(), 82, small::getWidth), center - 30, 9, new Color(235, 235, 235).getRGB());
+                small.drawStringWithShadow(CavernPlayerGui.trim(t.getArtist(), 82, small::getWidth), center - 30, 16, new Color(235, 235, 235).getRGB());
+                small.drawStringWithShadow(total, center - 30, 23, new Color(235, 235, 235).getRGB());
+            }
+        }
     }
 
     /**

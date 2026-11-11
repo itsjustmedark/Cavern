@@ -369,19 +369,15 @@ public class GuiIngame extends Gui
             if(addon.isState())
                 addon.displayHook();
 
-//        LiquidGlass.beginFrame();
-//        LiquidGlass.drawPanel(4, 4, 200, 150, 20, 0, 0, 0.3f, 0.35f, 0.2f, 0.6f);
-//        LiquidGlass.endFrame();
-
         var player = Cavern.INSTANCE.getPlayer();
 
-        if(player.getCurrent() != null) {
+        if(player.getCurrent() != null && !(!mc.isSingleplayer() && mc.getCurrentServerData() == null)) {
             var small = FontManager.getFont(FontType.NORMAL, 14);
             var center = scaledresolution.getScaledWidth() / 2;
             long real = player.getPositionMs();
             long dur = player.getDurationMs();
             String total = dur > 0 ? (CavernPlayerGui.time(real) + " / " + CavernPlayerGui.time(dur)) : "--:--";
-            LiquidGlass.drawPanel((float)center - 60, 4, 120, 30, 8, 4, 0, 1, 0, 0, 0);
+            LiquidGlass.drawPanel((float) center - 60, 4, 120, 30, 8, 4, 0, 1, 0, 0, 0);
 
             // COVER
             ResourceLocation cover = player.getCover().get();

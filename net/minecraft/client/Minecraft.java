@@ -1806,6 +1806,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             }
         }
 
+        if((!isSingleplayer() && getCurrentServerData() == null) && Keyboard.isKeyDown(Keyboard.KEY_M) && !(Minecraft.getMinecraft().currentScreen instanceof CavernPlayerGui))
+            Minecraft.getMinecraft().displayGuiScreen(new CavernPlayerGui());
+
         if (this.currentScreen == null || this.currentScreen.allowUserInput)
         {
             this.mcProfiler.endStartSection("mouse");
