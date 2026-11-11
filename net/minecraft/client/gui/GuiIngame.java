@@ -10,9 +10,17 @@ import java.util.Collection;
 import java.util.Random;
 
 import lombok.val;
+import lombok.var;
+import net.cavern.manager.FontManager;
+import net.cavern.player.components.CoverArt;
+import net.cavern.player.components.Track;
+import net.cavern.player.core.CavernPlayer;
+import net.cavern.player.ui.CavernPlayerGui;
+import net.cavern.utils.FontType;
 import net.cavern.utils.ui.Animation.AnimationType;
 import net.cavern.utils.ui.Animation;
 import net.cavern.utils.Time;
+import net.cavern.utils.ui.liquidglass.LiquidGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -364,6 +372,35 @@ public class GuiIngame extends Gui
 //        LiquidGlass.beginFrame();
 //        LiquidGlass.drawPanel(4, 4, 200, 150, 20, 0, 0, 0.3f, 0.35f, 0.2f, 0.6f);
 //        LiquidGlass.endFrame();
+
+        var player = Cavern.INSTANCE.getPlayer();
+
+        if(player.getCurrent() != null) {
+            var small = FontManager.getFont(FontType.NORMAL, 14);
+            var center = scaledresolution.getScaledWidth() / 2;
+            long real = player.getPositionMs();
+            long dur = player.getDurationMs();
+            String total = dur > 0 ? (CavernPlayerGui.time(real) + " / " + CavernPlayerGui.time(dur)) : "--:--";
+            LiquidGlass.drawPanel((float)center - 60, 4, 120, 30, 8, 4, 0, 1, 0, 0, 0);
+
+            // COVER
+            ResourceLocation cover = player.getCover().get();
+            Track t = player.getCurrent();
+            if (t != null && cover != null) {
+                GlStateManager.enableTexture2D();
+                GlStateManager.color(1f, 1f, 1f, 1f);
+                mc.getTextureManager().bindTexture(cover);
+                Gui.drawScaledCustomSizeModalRect(center - 54, 8, 0, 0, 22, 22, 22, 22, 22, 22);
+            } else
+                RenderingUtils.drawRoundedRect(center - 54, 22, (center - 54) + 22, 22 + 22, 6, new Color(255, 255, 255, 14).getRGB());
+
+            // TEXT
+            if (t != null) {
+                small.drawStringWithShadow(CavernPlayerGui.trim(t.getTitle(), 82, small::getWidth), center - 30, 9, new Color(235, 235, 235).getRGB());
+                small.drawStringWithShadow(CavernPlayerGui.trim(t.getArtist(), 82, small::getWidth), center - 30, 16, new Color(235, 235, 235).getRGB());
+                small.drawStringWithShadow(total, center - 30, 23, new Color(235, 235, 235).getRGB());
+            }
+        }
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableLighting();
