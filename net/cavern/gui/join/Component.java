@@ -4,7 +4,7 @@ public class Component {
 
     public double x, y, width, height;
     public JoinGamesGui parent;
-    public int color = -1;
+    public int color;
 
     public Component(double x, double y, double width, double height, JoinGamesGui parent, int color){
         this.x = x;

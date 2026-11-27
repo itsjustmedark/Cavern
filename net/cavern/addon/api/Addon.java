@@ -44,6 +44,11 @@ public class Addon {
         }
     }
 
+    // Needed for cavern gui to work
+    public boolean hasOptions() {
+        return !options.isEmpty();
+    }
+
     // This is for my own sanity, IM LAZY OKAY
     protected void addLegacyId(String... ids) {
         legacyIds.addAll(Arrays.asList(ids));

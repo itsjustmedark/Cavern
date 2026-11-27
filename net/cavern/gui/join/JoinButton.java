@@ -32,13 +32,7 @@ public class JoinButton extends Component {
     public void drawComponent(int mouseX, int mouseY, boolean hovered) {
         hovered = isHovered(mouseX, mouseY, (float) x, (float) y - parent.scroll, (float) width, (float) height);
         var font = FontManager.getFont(FontType.NORMAL, 22);
-        // Button Background
-//        RenderingUtils.drawRoundedRect((float) x, (float) y - parent.scroll, (float) (x + width), (float) (y + height) - parent.scroll,
-//                8, new Color(10, 10, 15, 170).getRGB());
-//        RenderingUtils.drawBlurredRect(RenderingUtils.BlurType.NORMAL, (float) x, (float) y - parent.scroll, (float) (x + width),
-//                (float) (y + height) - parent.scroll, 8);
         LiquidGlass.drawPanel((float) x, (float) y - parent.scroll, (float) width, (float) height, 8, 2, 2, 0, 0, 0, 0);
-        // Label
         font.drawCenteredStringWithShadow(text, (float) (x + (width / 2)), (float) (y + 7) - parent.scroll, hovered ?
                 Cavern.INSTANCE.getClientColorNonRGB().brighter().brighter().getRGB() : new Color(200, 200, 200).getRGB());
     }

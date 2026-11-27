@@ -5,9 +5,9 @@ import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.ScaledResolution;
 import net.cavern.addon.api.Addon;
 
-import static net.cavern.gui.keystrokes.Keystrokes.drawKeystrokes;
-
 public class Keystrokes extends Addon {
+    public final net.cavern.gui.keystrokes.Keystrokes keystrokes = new net.cavern.gui.keystrokes.Keystrokes();
+
     public Keystrokes() {
         super("keystrokes", "Keystrokes");
     }
@@ -15,7 +15,7 @@ public class Keystrokes extends Addon {
     @Override
     public void displayHook() {
         var sr = new ScaledResolution(mc);
-        drawKeystrokes(sr.getScaledWidth() - 66, sr.getScaledHeight() - (mc.currentScreen instanceof GuiChat ? 58 : 44));
+        keystrokes.drawKeystrokes(sr.getScaledWidth() - 66, sr.getScaledHeight() - (mc.currentScreen instanceof GuiChat ? 58 : 44));
         super.displayHook();
     }
 }

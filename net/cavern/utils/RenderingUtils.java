@@ -21,7 +21,6 @@ import static org.lwjgl.opengl.GL11.*;
 public class RenderingUtils {
 
     private static long lastTime = System.currentTimeMillis();
-    public static double rainbowState;
 
     public static void drawRectangle(float startX, float startY, float endX, float endY, int color) {
         GL11.glPushAttrib(GL11.GL_ENABLE_BIT | GL11.GL_COLOR_BUFFER_BIT |
@@ -163,25 +162,12 @@ public class RenderingUtils {
         GlStateManager.popMatrix();
     }
 
-    public static Color getRainbow(final int delay) {
-        rainbowState = Math.ceil((double) ((System.currentTimeMillis() + delay) / 8L));
-        rainbowState %= 270.0;
-        return Color.getHSBColor((float) (rainbowState / 270.0), 0.4f, 1f);
-    }
-
     public static int rgba(int r, int b, int g, int a) {
         return new Color(r, b, g, a).getRGB();
     }
 
     public static void updateDelta() {
         lastTime = System.currentTimeMillis();
-    }
-
-    public static void scissorBox(int x, int y, int width, int height) {
-        ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-        int factor = sr.getScaleFactor();
-        glEnable(GL_SCISSOR_TEST);
-        glScissor(x * factor, (sr.getScaledHeight() - (y + height)) * factor, ((x + width) - x) * factor, ((y + height) - y) * factor);
     }
 
     public static void cropBox(float x, float y, float width, float height) {

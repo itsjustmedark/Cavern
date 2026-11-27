@@ -12,7 +12,6 @@ import net.cavern.utils.FontType;
 import net.cavern.utils.ui.Animation;
 import net.cavern.utils.ui.Animation.AnimationType;
 import net.cavern.utils.CustomFontRenderer;
-import net.cavern.utils.RenderingUtils;
 import net.cavern.utils.Time;
 import net.cavern.utils.ui.liquidglass.LiquidGlass;
 
@@ -38,11 +37,10 @@ public class ToggleButton extends Component {
         slide = 0;
     }
 
-    public ToggleButton(double x, double y, double width, double height, CavernGui parent, Addon addon, int color, boolean cust, Option... options) {
+    public ToggleButton(double x, double y, double width, double height, CavernGui parent, Addon addon, int color, List<Option> options) {
         super(x, y, width, height, parent, color);
         this.addon = addon;
-        this.cust = cust;
-        Collections.addAll(this.options, options);
+        this.options.addAll(options);
         slide = 0;
     }
 
@@ -74,12 +72,6 @@ public class ToggleButton extends Component {
             wasState = state;
         }
 
-        // Button Background
-//        RenderingUtils.drawRoundedRect((float) x, (float) y - parent.scroll, (float) (x + width), (float) (y + height) - parent.scroll,
-//                8, new Color(10, 10, 15, 170).getRGB());
-//        RenderingUtils.drawBlurredRect(RenderingUtils.BlurType.NORMAL, (float) x, (float) y - parent.scroll, (float) (x + width),
-//                (float) (y + height) - parent.scroll, 8);
-
         LiquidGlass.drawPanel((float) x, (float) (y - parent.scroll), (float) width, (float) (height),
                 8, 4, 0, 1, 0, 0, 0);
 
@@ -88,21 +80,10 @@ public class ToggleButton extends Component {
                 addon.isState() ? Cavern.INSTANCE.getClientColorNonRGB().brighter().brighter().getRGB() : new Color(200, 200, 200).getRGB());
 
         // Slider Background
-//        RenderingUtils.drawRoundedRect((float) ((x + width) - 32), (float) (y + 4) - parent.scroll, (float) ((x + width) - 4), (float)
-//                ((y + height) - 4) - parent.scroll, 6, new Color(40, 40, 55, 115).getRGB());
-//        RenderingUtils.drawBlurredRect(RenderingUtils.BlurType.NORMAL, (float) ((x + width) - 32), (float) (y + 4), (float) ((x + width) - 4),
-//                (float) ((y + height) - 4), 6);
-
         LiquidGlass.drawPanel((float) (x + width) - 32, (float) ((y + 4) - parent.scroll), (float) 28, (float) (16),
                 8, 2, 0, 1, 0, 0, 0);
 
         // Slider
-//        RenderingUtils.drawRoundedRect(modState, (float) (y + 6) - parent.scroll, modState + 12,
-//                (float) ((y + height) - 6) - parent.scroll, 6,
-//                state ? RenderingUtils.rgba(90, 70, 124, 115) : RenderingUtils.rgba(145, 145, 165, 115));
-//        RenderingUtils.drawBlurredRect(RenderingUtils.BlurType.NORMAL, modState, (float) (y + 6) - parent.scroll, modState + 12,
-//                (float) ((y + height) - 6) - parent.scroll, 6);
-
         LiquidGlass.drawPanel((float) (modState), (float) ((y + 6) - parent.scroll), (float) 12, (float) (12),
                 8, 5, 0, 1, .2f, .2f, .2f);
 
@@ -137,18 +118,9 @@ public class ToggleButton extends Component {
                     option.isVal() ? Cavern.INSTANCE.getClientColorNonRGB().brighter().brighter().getRGB() : new Color(200, 200, 200).getRGB());
 
             // Background
-//            LiquidGlass.beginFrame();
             LiquidGlass.drawPanel(x, y - 2, 28, 16, 8, 2, 0, 1,0, 0, 0);
-//            LiquidGlass.endFrame();
-//            RenderingUtils.drawRoundedRect(x, y - 2, x + 28, y + 14, 6
-//                    , new Color(0, 0, 0, 100).getRGB());
-//            RenderingUtils.drawBlurredRect(RenderingUtils.BlurType.NORMAL, x, y - 2, x + 28, y + 14, 6);
-
             // Slider
             LiquidGlass.drawPanel(x + option.optState, y, 12,  12, 8, 5, 0, 1, .2f, .2f, .2f);
-//            RenderingUtils.drawRoundedRect(x + option.optState, y, x + option.optState + 12, y + 12, 6,
-//                    option.val ? RenderingUtils.rgba(90, 70, 124, 115) : RenderingUtils.rgba(145, 145, 165, 115));
-//            RenderingUtils.drawBlurredRect(RenderingUtils.BlurType.NORMAL, x + option.optState, y, x + option.optState + 12, y + 12, 6);
         }
     }
 

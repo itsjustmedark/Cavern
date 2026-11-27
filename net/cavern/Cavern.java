@@ -27,7 +27,7 @@ import static net.cavern.gui.quickzoom.QuickZoom.mc;
 public enum Cavern {
     INSTANCE;
     // making an exception for this, thats fuckin ugly man. i dont know how i went 2 fuckin years without even having these here man what the fuck
-    public static final String NAME = "Cavern", CAVERN_VERSION = "1.3.0", CAVERN_FORMATTED = String.format("%s %s", Cavern.NAME, Cavern.CAVERN_VERSION), CAVERN_DEV = "justmedark";
+    public static final String NAME = "Cavern", CAVERN_VERSION = "1.3.1", CAVERN_FORMATTED = String.format("%s %s", Cavern.NAME, Cavern.CAVERN_VERSION), CAVERN_DEV = "justmedark";
     public final int clientColor = new Color(90, 70, 124, 255).getRGB();
     public final Color clientColorNonRGB = new Color(90, 70, 124, 255);
     private AddonManager addonManager;
@@ -48,7 +48,7 @@ public enum Cavern {
         Display.setTitle(String.format("%s %s", Cavern.NAME, Cavern.CAVERN_VERSION));
         initFileSystem();
 
-        File musicDir = new File(mc.mcDataDir, "cavern" + File.separator + "Music");
+        File musicDir = new File(mc.mcDataDir, "cavern" + File.separator + "music");
         player = new CavernPlayer(new MusicLibrary(musicDir));
         player.getLibrary().scan();
 
