@@ -39,11 +39,12 @@ public class PotionHud extends Addon {
 
         // Cache potion effects and level suffixes
         var activePotionEffects = mc.thePlayer.getActivePotionEffects();
+        var font = FontManager.getFont(FontType.NORMAL, 17);
+        int color = Cavern.INSTANCE.getClientColor();
 
         for (PotionEffect effect : activePotionEffects) {
             var potion = Potion.potionTypes[effect.getPotionID()];
             var level = I18n.format(potion.getName());
-            var font = FontManager.getFont(FontType.NORMAL, 17);
 
             // Use Map to get the suffix
             String suffix = LEVEL_SUFFIXES.getOrDefault(effect.getAmplifier(), "");

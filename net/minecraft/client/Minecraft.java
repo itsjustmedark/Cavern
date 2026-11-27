@@ -38,6 +38,7 @@ import lombok.Getter;
 import net.cavern.gui.join.JoinGamesGui;
 import net.cavern.player.ui.CavernPlayerGui;
 import net.cavern.utils.RenderingUtils;
+import net.cavern.utils.Time;
 import net.cavern.utils.WindowIcon;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -1067,6 +1068,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         long i = System.nanoTime();
         this.mcProfiler.startSection("root");
 
+        Time.update();
+        if (Cavern.INSTANCE.getFileManager() != null) Cavern.INSTANCE.getFileManager().tick();
+
         if (Display.isCreated() && Display.isCloseRequested())
         {
             this.shutdown();
@@ -1226,6 +1230,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 this.resize(this.displayWidth, this.displayHeight);
             }
         }
+        Time.reset();
     }
 
     public int getLimitFramerate()

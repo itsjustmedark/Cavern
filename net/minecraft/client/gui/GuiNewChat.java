@@ -31,39 +31,34 @@ public class GuiNewChat extends Gui
     private int scrollPos;
     private boolean isScrolled;
     private float animate;
-    Map<Integer, Animation> chatAnims = new HashMap<>();
-    Map<Integer, Float> chatAnimStates = new HashMap<>();
 
     public GuiNewChat(Minecraft mcIn)
     {
         this.mc = mcIn;
     }
 
-    public void drawChat(int p_146230_1_)
-    {
-        if (this.mc.gameSettings.chatVisibility != EntityPlayer.EnumChatVisibility.HIDDEN)
-        {
+    public void drawChat(int p_146230_1_) {
+        if (this.mc.gameSettings.chatVisibility != EntityPlayer.EnumChatVisibility.HIDDEN) {
             int i = this.getLineCount();
             boolean flag = false;
             int j = 0;
             int k = this.field_146253_i.size();
             float f = this.mc.gameSettings.chatOpacity * 0.9F + 0.1F;
 
-            if (k > 0)
-            {
-                if (this.getChatOpen())
-                {
+            if (k > 0) {
+                if (this.getChatOpen()) {
                     flag = true;
                 }
 
                 float f1 = this.getChatScale();
-                int l = MathHelper.ceiling_float_int((float)this.getChatWidth() / f1);
+                int l = MathHelper.ceiling_float_int((float) this.getChatWidth() / f1);
                 GlStateManager.pushMatrix();
                 GlStateManager.translate(2.0F, 20.0F, 0.0F);
                 GlStateManager.scale(f1, f1, 1.0F);
 
+                boolean customChat = Cavern.INSTANCE.getAddonManager().getAddon("custom_chat").isState();
                 for (int i1 = 0; i1 + this.scrollPos < this.field_146253_i.size() && i1 < i; ++i1) {
-                    ChatLine chatline = (ChatLine) this.field_146253_i.get(i1 + this.scrollPos);
+                    ChatLine chatline = this.field_146253_i.get(i1 + this.scrollPos);
 
                     if (chatline != null) {
                         int j1 = p_146230_1_ - chatline.getUpdatedCounter();
@@ -84,29 +79,22 @@ public class GuiNewChat extends Gui
                             ++j;
                             if (l1 > 3) {
                                 int i2 = 0;
-                                int j2 = (-i1 * 9) + (Cavern.INSTANCE.getAddonManager().getAddon("custom_chat").isState() ? 14 : 0);
+                                int j2 = (-i1 * 9) + (customChat ? 14 : 0);
 
-                                int lineId = chatline.getUpdatedCounter();
-                                chatAnims.putIfAbsent(lineId, new Animation());
-                                chatAnimStates.putIfAbsent(lineId, 0f);
-
-                                Animation lineAnim = chatAnims.get(lineId);
-                                if (!lineAnim.isFinished() && !lineAnim.isRunning()) {
+                                Animation lineAnim = chatline.anim;
+                                if (!lineAnim.isFinished() && !lineAnim.isRunning())
                                     lineAnim.start(AnimationType.SMOOTHSTEP, 0, l + 4, 0.3f);
-                                }
-                                if (lineAnim.isRunning()) {
-                                    chatAnimStates.put(lineId, lineAnim.update(Time.delta));
-                                }
-                                float animate = chatAnimStates.getOrDefault(lineId, (float)(l + 4));
+                                if (lineAnim.isRunning())
+                                    chatline.animState = lineAnim.update(Time.delta);
+                                float animate = lineAnim.isFinished() ? l + 4 : chatline.animState;
 
                                 RenderingUtils.drawRectangle((float) i2, (float) (j2 - 9), (float) i2 + animate, j2, l1 / 2 << 24);
-                                if (Cavern.INSTANCE.getAddonManager().getAddon("custom_chat").isState())
+                                if (customChat)
                                     RenderingUtils.drawRectangle(i2, j2 - 9, i2 + 1.5f, j2, Cavern.INSTANCE.getClientColor());
 
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
-                                this.mc.fontRendererObj.drawStringWithShadow(s, (float) i2 +
-                                        (Cavern.INSTANCE.getAddonManager().getAddon("custom_chat").isState() ? 4 : 0), (float) (j2 - 8), 16777215 + (l1 << 24));
+                                this.mc.fontRendererObj.drawStringWithShadow(s, (float) i2 + (customChat ? 4 : 0), (float) (j2 - 8), 16777215 + (l1 << 24));
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
                             }
@@ -114,8 +102,7 @@ public class GuiNewChat extends Gui
                     }
                 }
 
-                if (flag)
-                {
+                if (flag) {
                     int k2 = this.mc.fontRendererObj.FONT_HEIGHT;
                     GlStateManager.translate(-3.0F, 0.0F, 0.0F);
                     int l2 = k * k2 + k;
@@ -123,8 +110,7 @@ public class GuiNewChat extends Gui
                     int j3 = this.scrollPos * i3 / k;
                     int k1 = i3 * i3 / l2;
 
-                    if (l2 != i3)
-                    {
+                    if (l2 != i3) {
                         int k3 = j3 > 0 ? 170 : 96;
                         int l3 = this.isScrolled ? 13382451 : 3355562;
                         drawRect(0, -j3, 2, -j3 - k1, l3 + (k3 << 24));

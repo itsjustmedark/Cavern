@@ -16,25 +16,24 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class BlurShader {
 
-    public static ShaderUtil blurShader = new ShaderUtil("fragment/blur.frag");
-
     public static Framebuffer framebuffer = new Framebuffer(1, 1, false);
-
-    private static Minecraft mc = Minecraft.getMinecraft();
+    public static ShaderUtil blurShader = new ShaderUtil("fragment/blur.frag");
+    private static final FloatBuffer weightBuffer = BufferUtils.createFloatBuffer(256);
+    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static float cachedRadius = -1;
 
 
     public static void setupUniforms(float dir1, float dir2, float radius) {
         blurShader.setUniformi("textureIn", 0);
-        blurShader.setUniformf("texelSize", 1.0F / (float) Minecraft.getMinecraft().displayWidth, 1.0F / (float) Minecraft.getMinecraft().displayHeight);
+        blurShader.setUniformf("texelSize", 1.0F / (float) mc.displayWidth, 1.0F / (float) mc.displayHeight);
         blurShader.setUniformf("direction", dir1, dir2);
         blurShader.setUniformf("radius", radius);
-
-        final FloatBuffer weightBuffer = BufferUtils.createFloatBuffer(256);
-        for (int i = 0; i <= radius; i++) {
-            weightBuffer.put(MathUtils.calculateGaussianValue(i, radius / 2));
+        if (radius != cachedRadius) {
+            weightBuffer.clear();
+            for (int i = 0; i <= radius; i++) weightBuffer.put(MathUtils.calculateGaussianValue(i, radius / 2));
+            weightBuffer.rewind();
+            cachedRadius = radius;
         }
-
-        weightBuffer.rewind();
         glUniform1(blurShader.getUniform("weights"), weightBuffer);
     }
 

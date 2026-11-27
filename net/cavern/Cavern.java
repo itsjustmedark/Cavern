@@ -30,9 +30,10 @@ public enum Cavern {
     public static final String NAME = "Cavern", CAVERN_VERSION = "1.3.1", CAVERN_FORMATTED = String.format("%s %s", Cavern.NAME, Cavern.CAVERN_VERSION), CAVERN_DEV = "justmedark";
     public final int clientColor = new Color(90, 70, 124, 255).getRGB();
     public final Color clientColorNonRGB = new Color(90, 70, 124, 255);
+    private boolean running = true, rpcEnabled;
+    public String lastDetails, lastTitle;
     private AddonManager addonManager;
     private FileManager fileManager;
-    private boolean running = true;
     public MusicLibrary library;
     public CavernPlayer player;
     public CavernGui cavernGui;
@@ -43,12 +44,12 @@ public enum Cavern {
         QuickZoom.init();
 //        startRPC(); disabled because it kills cpu performance
         //Fast Render you can personally fuck off and never enable again, 1 hour of pain over this
-        Minecraft.getMinecraft().gameSettings.ofFastRender = false;
+//        Minecraft.getMinecraft().gameSettings.ofFastRender = false;
         Minecraft.getMinecraft().gameSettings.guiScale = 2;
         Display.setTitle(String.format("%s %s", Cavern.NAME, Cavern.CAVERN_VERSION));
         initFileSystem();
 
-        File musicDir = new File(mc.mcDataDir, "cavern" + File.separator + "music");
+        File musicDir = new File(mc.mcDataDir, "cavern" + File.separator + "Music");
         player = new CavernPlayer(new MusicLibrary(musicDir));
         player.getLibrary().scan();
 
@@ -82,6 +83,7 @@ public enum Cavern {
 //                }
 //            }
 //        }.start();
+        rpcEnabled = true;
     }
 
     public void stopRPC(){
@@ -90,6 +92,10 @@ public enum Cavern {
     }
 
     public void updateRPC(String details, String title){
+        if (!rpcEnabled) return;
+        if (details.equals(lastDetails) && title.equals(lastTitle)) return;
+        lastDetails = details;
+        lastTitle = title;
         DiscordRichPresence.Builder builder = new DiscordRichPresence.Builder(title);
         builder.setBigImage("logo", "");
         builder.setDetails(details);

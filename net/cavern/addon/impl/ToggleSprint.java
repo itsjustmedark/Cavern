@@ -10,11 +10,14 @@ import net.cavern.addon.api.Addon;
 import net.cavern.manager.FontManager;
 
 public class ToggleSprint extends Addon {
+
     public ToggleSprint() {
         super("toggle_sprint", "Toggle Sprint");
         addLegacyId("togglesprint");
     }
+
     public String text = "Sprinting \247f(Toggled)";
+    private float textWidth = -1;
 
     @Override
     public void entityHook() {
@@ -24,10 +27,9 @@ public class ToggleSprint extends Addon {
 
     @Override
     public void displayHook() {
-        var scaledResolution = new ScaledResolution(mc);
         var font = FontManager.getFont(FontType.NORMAL, 16);
-        LabelWidget label = new LabelWidget((int) (scaledResolution.getScaledWidth() - font.getWidth(text)), 2, 10, font, text, Cavern.INSTANCE.getClientColor());
-        label.draw(scaledResolution);
+        if (textWidth < 0) textWidth = font.getWidth(text);
+        font.drawStringWithShadow(text, (int) (mc.ingameGUI.scaledRes.getScaledWidth() - textWidth), 2, Cavern.INSTANCE.getClientColor());
         super.displayHook();
     }
 }

@@ -24,7 +24,6 @@ import net.cavern.player.components.Track;
 import net.cavern.player.ui.CavernPlayerGui;
 import net.cavern.utils.FontType;
 import net.cavern.utils.RenderingUtils;
-import net.cavern.utils.Time;
 import net.cavern.utils.ui.liquidglass.LiquidGlass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -59,6 +58,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Set<String> PROTOCOLS = Sets.newHashSet(new String[] {"http", "https"});
     private static final Splitter NEWLINE_SPLITTER = Splitter.on('\n');
+    private static final int NOW_PLAYING_TEXT = 0xFFEBEBEB;
 
     /** Reference to the Minecraft object. */
     protected Minecraft mc;
@@ -96,15 +96,13 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        Time.update();
-        for (int i = 0; i < this.buttonList.size(); ++i) {
-            ((GuiButton) this.buttonList.get(i)).drawButton(this.mc, mouseX, mouseY);
+        for (GuiButton guiButton : this.buttonList) {
+            guiButton.drawButton(this.mc, mouseX, mouseY);
         }
 
-        for (int j = 0; j < this.labelList.size(); ++j) {
-            ((GuiLabel) this.labelList.get(j)).drawLabel(this.mc, mouseX, mouseY);
+        for (GuiLabel guiLabel : this.labelList) {
+            guiLabel.drawLabel(this.mc, mouseX, mouseY);
         }
-        Time.reset();
 
         var scaledresolution = new ScaledResolution(Minecraft.getMinecraft());
         var player = Cavern.INSTANCE.getPlayer();
@@ -130,9 +128,9 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
             // TEXT
             if (t != null) {
-                small.drawStringWithShadow(CavernPlayerGui.trim(t.getTitle(), 82, small::getWidth), center - 30, 9, new Color(235, 235, 235).getRGB());
-                small.drawStringWithShadow(CavernPlayerGui.trim(t.getArtist(), 82, small::getWidth), center - 30, 16, new Color(235, 235, 235).getRGB());
-                small.drawStringWithShadow(total, center - 30, 23, new Color(235, 235, 235).getRGB());
+                small.drawStringWithShadow(CavernPlayerGui.trim(t.getTitle(), 82, small::getWidth), center - 30, 9, NOW_PLAYING_TEXT);
+                small.drawStringWithShadow(CavernPlayerGui.trim(t.getArtist(), 82, small::getWidth), center - 30, 16, NOW_PLAYING_TEXT);
+                small.drawStringWithShadow(total, center - 30, 23, NOW_PLAYING_TEXT);
             }
         }
     }

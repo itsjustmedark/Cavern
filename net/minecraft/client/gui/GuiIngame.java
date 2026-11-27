@@ -66,9 +66,11 @@ public class GuiIngame extends Gui
     private static final ResourceLocation vignetteTexPath = new ResourceLocation("textures/misc/vignette.png");
     private static final ResourceLocation widgetsTexPath = new ResourceLocation("textures/gui/widgets.png");
     private static final ResourceLocation pumpkinBlurTexPath = new ResourceLocation("textures/misc/pumpkinblur.png");
+    private static final int NOW_PLAYING_TEXT = 0xFFEBEBEB;
     private final Random rand = new Random();
-    private final Minecraft mc;
     private final RenderItem itemRenderer;
+    public ScaledResolution scaledRes;
+    private final Minecraft mc;
 
     /** ChatGUI instance that retains all previous chat data */
     private final GuiNewChat persistantChatGUI;
@@ -135,6 +137,7 @@ public class GuiIngame extends Gui
     {
         Cavern.INSTANCE.updateRPC("In Game", mc.isSingleplayer() ? "In Singleplayer" : "Connected to " + mc.getCurrentServerData().serverIP);
         ScaledResolution scaledresolution = new ScaledResolution(this.mc);
+        this.scaledRes = scaledresolution;
         int i = scaledresolution.getScaledWidth();
         int j = scaledresolution.getScaledHeight();
         this.mc.entityRenderer.setupOverlayRendering();
@@ -392,9 +395,9 @@ public class GuiIngame extends Gui
 
             // TEXT
             if (t != null) {
-                small.drawStringWithShadow(CavernPlayerGui.trim(t.getTitle(), 82, small::getWidth), center - 30, 9, new Color(235, 235, 235).getRGB());
-                small.drawStringWithShadow(CavernPlayerGui.trim(t.getArtist(), 82, small::getWidth), center - 30, 16, new Color(235, 235, 235).getRGB());
-                small.drawStringWithShadow(total, center - 30, 23, new Color(235, 235, 235).getRGB());
+                small.drawStringWithShadow(CavernPlayerGui.trim(t.getTitle(), 82, small::getWidth), center - 30, 9, NOW_PLAYING_TEXT);
+                small.drawStringWithShadow(CavernPlayerGui.trim(t.getArtist(), 82, small::getWidth), center - 30, 16, NOW_PLAYING_TEXT);
+                small.drawStringWithShadow(total, center - 30, 23, NOW_PLAYING_TEXT);
             }
         }
 

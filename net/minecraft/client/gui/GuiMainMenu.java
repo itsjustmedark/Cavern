@@ -33,6 +33,8 @@ import org.lwjgl.opengl.GLContext;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 {
+    private static final ResourceLocation MENU_BANNER = new ResourceLocation("Images/prototype_new_logo_banner.png");
+    private static final ResourceLocation MENU_BG = new ResourceLocation("Images/cavern-menu-bg.png");
     private static final AtomicInteger field_175373_f = new AtomicInteger(0);
     private static final Logger logger = LogManager.getLogger();
     private static final Random RANDOM = new Random();
@@ -328,7 +330,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     {
         Cavern.INSTANCE.updateRPC("In The Menus", "Main Menu");
         drawDefaultBackground();
-        RenderingUtils.drawImg(new ResourceLocation("Images/cavern-menu-bg.png"), 0, 0, width, height);
+        RenderingUtils.drawImg(MENU_BG, 0, 0, width, height);
 
         float x1 = (float) (width / 2) - 104;
         float y1 = (float) (height / 2) - 90;
@@ -340,10 +342,10 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         RenderingUtils.drawRectangle(x1 - 2, y1 - 2, x2 + 2, y2 + 2, RenderingUtils.rgba(90, 70, 124, 30));
         RenderingUtils.drawRectangle(x1 - 1, y1 - 1, x2 + 1, y2 + 1, RenderingUtils.rgba(90, 70, 124, 50));
 
-        RenderingUtils.drawBorderCorneredRectangle(x1, y1, x2, y2, 1, RenderingUtils.rgba(15, 12, 20, 105), RenderingUtils.rgba(90, 70, 124, 15));
+        RenderingUtils.drawBorderCorneredRectangle(x1, y1, x2, y2, 1, RenderingUtils.rgba(15, 12, 20, 105),
+                RenderingUtils.rgba(90, 70, 124, 15));
         RenderingUtils.drawBlurredRect(RenderingUtils.BlurType.KAWASE, x1, y1, x2, y2, 0);
-        RenderingUtils.drawBlurredRect(RenderingUtils.BlurType.NORMAL, x1, y1, x2, y2, 0);
-        RenderingUtils.drawImg(new ResourceLocation("Images/prototype_new_logo_banner.png"), ((double) width / 2) - 105,
+        RenderingUtils.drawImg(MENU_BANNER, ((double) width / 2) - 105,
                 yPosition + ((double) height / 2) - 90, 210, 120);
         var font = FontManager.getFont(FontType.MEDIUM, 16);
         var scaledResolution = new ScaledResolution(this.mc);

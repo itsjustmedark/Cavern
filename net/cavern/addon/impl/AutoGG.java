@@ -18,10 +18,12 @@ public class AutoGG extends Addon {
     public void packetHook(Packet packet) {
         if (packet instanceof S02PacketChat)
             if (((S02PacketChat) packet).getChatComponent().getUnformattedText().contains("Reward Summary"))
-                mc.thePlayer.sendChatMessage(fun.val ? funMessages() : "gg");
+                mc.addScheduledTask(() -> {
+                    if (mc.thePlayer != null) mc.thePlayer.sendChatMessage(fun.val ? funMessages() : "gg");
+                });
     }
 
-    public String funMessages(){
+    public String funMessages() {
         String[] messages = {"Damn well played mate", "GG I'll get ya next time", "Aw i totally had you, gg",
                 "GG well played", "GG good fight mate", "GG good fight man"};
         return messages[MathUtils.randomInt(0, 5)];

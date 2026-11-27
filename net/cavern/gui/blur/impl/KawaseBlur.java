@@ -44,7 +44,10 @@ public class KawaseBlur {
 
 
     public static void renderBlur(int iterations, int offset) {
-        if (currentIterations != iterations) {
+        Minecraft mc = Minecraft.getMinecraft();
+        if (currentIterations != iterations || framebufferList.size() < 2
+                || framebufferList.get(1).framebufferWidth != mc.displayWidth
+                || framebufferList.get(1).framebufferHeight != mc.displayHeight) {
             initFramebuffers(iterations);
             currentIterations = iterations;
         }

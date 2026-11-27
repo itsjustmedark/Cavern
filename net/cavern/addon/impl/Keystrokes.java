@@ -14,7 +14,7 @@ public class Keystrokes extends Addon {
 
     @Override
     public void displayHook() {
-        var sr = new ScaledResolution(mc);
+        var sr = mc.ingameGUI.scaledRes;
         keystrokes.drawKeystrokes(sr.getScaledWidth() - 66, sr.getScaledHeight() - (mc.currentScreen instanceof GuiChat ? 58 : 44));
         super.displayHook();
     }
